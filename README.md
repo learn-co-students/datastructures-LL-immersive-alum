@@ -41,7 +41,7 @@ NSLog(@"%@",[myList objectAtIndex:1]); //Prints out Al
 
 [myList addObject:@"Avi" atIndex:0] // LL is now Avi, Joe, Chris
 
-[myList reverse] // LL is now Chris, Joe, Avi
+FISLinkedLIst *reversedList =  [myList reverse] // reversedList is now Chris, Joe, Avi
 
 NSLog(@"%d", [myList count]) //Prints out 3
 ```
