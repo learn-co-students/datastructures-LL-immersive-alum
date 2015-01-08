@@ -25,20 +25,20 @@
         _count = 0;
         if (array.count > 0) {
             for (NSUInteger index = 0; index < array.count; index++) {
-                FISNode *currentItem = array[index];
+                id <Node> currentItem = array[index];
                 NSUInteger lastIndex = array.count-1;
                 
                 if (index == 0) {
                     self.head = currentItem;
-                    currentItem.previousNode = nil;
+                    [currentItem setPreviousNode:nil];
                 } else {
                     
-                    FISNode *previousItem = array[index-1];
+                    id <Node> previousItem = array[index-1];
                     [previousItem setNextNode:currentItem];
                     [currentItem setPreviousNode:previousItem];
                     
                     if (index == lastIndex) self.tail = currentItem;
-                    currentItem.nextNode = nil;
+                    [currentItem setNextNode:nil];
                 }
                 _count++;
                 
@@ -58,11 +58,11 @@
     
     do {
         if (currentIndex == index) {
-            return currentNode.content;
+            return [currentNode content];
         }
         
         currentIndex++;
-        currentNode = currentNode.nextNode;
+        currentNode = [currentNode nextNode];
     } while (currentNode);
     
     return nil;
@@ -78,11 +78,11 @@
 }
 
 - (NSString *)removeFirstObject {
-    FISNode *firstNode = self.head;
-    self.head = firstNode.nextNode;
+    id <Node> firstNode = self.head;
+    self.head = [firstNode nextNode];
     self.count--;
     
-    return firstNode.content;
+    return [firstNode content];
 }
 
 - (void)addObject:(NSString *)object {
@@ -90,8 +90,8 @@
     newTail.content = object;
     
     if (self.tail) {
-        FISNode *oldTail = self.tail;
-        oldTail.nextNode = newTail;
+        id <Node> oldTail = self.tail;
+        [oldTail setNextNode:newTail];
         newTail.previousNode = oldTail;
     } else {
         self.head = newTail;
@@ -102,8 +102,9 @@
 }
 
 - (NSString *)removeLastObject {
-    FISNode *oldLastNode = self.tail;
-    oldLastNode.previousNode.nextNode = nil;
+    id <Node> oldLastNode = self.tail;
+    [[oldLastNode previousNode] setNextNode:nil];
+    
     if (self.count > 0) self.count--;
     
     return oldLastNode.content;
@@ -114,19 +115,19 @@
     newNode.content = object;
     
     NSUInteger currentIndex = 0;
-    FISNode *currentNode = self.head;
+    id <Node> currentNode = self.head;
     
     while (currentIndex <= self.count) {
         if (currentIndex == index) {
             
             if (currentNode) {
                 newNode.nextNode = currentNode;
-                newNode.previousNode = currentNode.previousNode;
-                currentNode.previousNode.nextNode = newNode;
-                currentNode.previousNode = newNode;
+                newNode.previousNode = [currentNode previousNode];
+                [[currentNode previousNode] setNextNode:newNode];
+                [currentNode setPreviousNode:newNode];
             } else {
-                FISNode *oldTail = self.tail;
-                oldTail.nextNode = newNode;
+                id <Node> oldTail = self.tail;
+                [oldTail setNextNode:newNode];
                 newNode.previousNode = oldTail;
             }
             
@@ -138,56 +139,56 @@
         }
         
         currentIndex++;
-        currentNode = currentNode.nextNode;
+        currentNode = [currentNode nextNode];
     }
 
 }
 
 - (NSString *)removeObjectatIndex:(NSUInteger)index {
     NSUInteger currentIndex = 0;
-    FISNode *currentNode = self.head;
+    id <Node> currentNode = self.head;
     
     while (currentIndex < self.count) {
         if (currentIndex == index) {
-            FISNode *nodeBefore = currentNode.previousNode;
-            FISNode *nodeAfter = currentNode.nextNode;
+            id <Node> nodeBefore = currentNode.previousNode;
+            id <Node> nodeAfter = currentNode.nextNode;
             
-            nodeBefore.nextNode = nodeAfter;
-            nodeAfter.previousNode = nodeBefore;
+            [nodeBefore setNextNode:nodeAfter];
+            [nodeAfter setPreviousNode:nodeBefore];
             
             if ([self.head isEqual:currentNode]) self.head = nil;
             if ([self.tail isEqual:currentNode]) self.tail = nil;
             
             self.count--;
-            return currentNode.content;
+            return [currentNode content];
         }
         
         currentIndex++;
-        currentNode = currentNode.nextNode;
+        currentNode = [currentNode nextNode];
     }
     return nil;
 }
 
 - (BOOL)indcludes:(NSString *)object {
-    FISNode *currentNode = self.head;
+    id <Node> currentNode = self.head;
     
     while (currentNode) {
-        if ([currentNode.content isEqualToString:object]) {
+        if ([[currentNode content] isEqualToString:object]) {
             return YES;
         }
-        currentNode = currentNode.nextNode;
+        currentNode = [currentNode nextNode];
     }
     return NO;
 }
 
 - (FISLinkedList *)reverse {
-    FISNode *currentNode = self.tail;
+    id <Node> currentNode = self.tail;
     
     FISLinkedList *reversedList = [[FISLinkedList alloc] init];
     
     while (currentNode) {
-        [reversedList addObject:currentNode.content];
-        currentNode = currentNode.previousNode;
+        [reversedList addObject:[currentNode content]];
+        currentNode = [currentNode previousNode];
     }
     
     return reversedList;
