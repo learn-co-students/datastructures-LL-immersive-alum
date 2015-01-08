@@ -159,8 +159,8 @@ describe(@"FISLinkedList", ^{
         
         beforeEach(^{
             countBefore = linkedList.count;
-            [linkedList insertLastObject:anObject];
-            [emptyList insertLastObject:anObject];
+            [linkedList addObject:anObject];
+            [emptyList addObject:anObject];
         });
         
         context(@"with a non-empty list", ^{
@@ -358,7 +358,7 @@ describe(@"FISLinkedList", ^{
         context(@"with a list with 1 item", ^{
             
             beforeEach(^{
-                [emptyList insertLastObject:@"Just one item"];
+                [emptyList addObject:@"Just one item"];
                 countBefore = emptyList.count;
                 result = [emptyList removeObjectatIndex:0];
             });
@@ -401,7 +401,7 @@ describe(@"FISLinkedList", ^{
         
         context(@"when the list contains 1 object", ^{
             it(@"should return the original linked list",^{
-                [emptyList insertLastObject:@"The only object!"];
+                [emptyList addObject:@"The only object!"];
                 FISLinkedList *reversed = [emptyList reverse];
                 expect([reversed objectAtIndex:0]).to.equal([emptyList objectAtIndex:0]);
                 expect(reversed.count).to.equal(1);
