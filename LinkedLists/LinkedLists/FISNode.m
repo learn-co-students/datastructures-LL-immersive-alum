@@ -10,4 +10,9 @@
 
 @implementation FISNode
 
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"%@",self.content];
+}
+
 @end
