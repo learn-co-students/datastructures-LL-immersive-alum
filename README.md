@@ -6,7 +6,7 @@ languages: objc
 
 # Linked Lists
 
-Let's make a mutable, singly linked list class. **You can assume all data will be NSStrings**
+Let's make a mutable, doubly linked list class. **You can assume all data will be NSStrings**
 
 ## Requirements
 
