@@ -85,7 +85,7 @@
     return firstNode.content;
 }
 
-- (void)insertLastObject:(NSString *)object {
+- (void)addObject:(NSString *)object {
     FISNode *newTail = [[FISNode alloc] init];
     newTail.content = object;
     
@@ -186,7 +186,7 @@
     FISLinkedList *reversedList = [[FISLinkedList alloc] init];
     
     while (currentNode) {
-        [reversedList insertLastObject:currentNode.content];
+        [reversedList addObject:currentNode.content];
         currentNode = currentNode.previousNode;
     }
     
