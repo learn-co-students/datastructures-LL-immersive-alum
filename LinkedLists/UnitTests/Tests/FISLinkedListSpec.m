@@ -153,7 +153,7 @@ describe(@"FISLinkedList", ^{
         });
     });
     
-    describe(@"inserting an object at the end of a list", ^{
+    describe(@"add an object at the end of a list", ^{
         __block NSString *anObject = @"Last object added!";
         __block NSUInteger countBefore;
         
