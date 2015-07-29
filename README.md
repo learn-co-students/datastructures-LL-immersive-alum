@@ -1,7 +1,4 @@
----
-tags: CS, linkedlists, data structures
-languages: objc
----
+
 
 
 # Linked Lists
