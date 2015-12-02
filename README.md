@@ -48,3 +48,5 @@ NSLog(@"%d", [myList count]) //Prints out 3
   * [Linked List](http://en.wikipedia.org/wiki/Linked_list)
   * [The First Class I ever TAed still has it's LL explanation up! It's in Java though](http://www.cs.cmu.edu/~adamchik/15-121/lectures/Linked%20Lists/linked%20lists.html)
   * [Linked List in Plain English...sorta](https://www.youtube.com/watch?v=oiW79L8VYXk)
+
+<a href='https://learn.co/lessons/datastructures-LL' data-visibility='hidden'>View this lesson on Learn.co</a>
